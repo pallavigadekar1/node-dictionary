@@ -1,0 +1,15 @@
+{
+  "name": "dictionary-tool",
+  "version": "1.0.0",
+  "description": "command line tool",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "pallavi gadekar",
+  "license": "ISC",
+  "dependencies": {
+    "https": "^1.0.0",
+    "readline": "^1.3.0"
+  }
+}
