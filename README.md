@@ -1,0 +1,2 @@
+# node-dictionary
+ dictionary tool
