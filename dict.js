@@ -4,7 +4,7 @@ const endPoints = require('./Endpoints'),
     dictionary = require('./dictionary_functions'),
     args = process.argv;
 
-switch (args[2]) {
+ switch (args[2]) {
     case 'def':
         dictionary.defn(args[3]);
         break;
@@ -115,8 +115,13 @@ switch (args[2]) {
             dictionary.getAll(args[2])
         }
         else {
-            word = endPoints.getRandomWord()
-            dictionary.getAll(word);
+             endPoints.getRandomWord().then(word=>{
+                 console.log('word generated-->',word);
+                 dictionary.getAll(word);
+             }).catch(err=>{
+                 console.log(err);
+             })
+           
         }
         break;
 

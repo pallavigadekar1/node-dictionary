@@ -1,32 +1,35 @@
 const host_data = require('./host_config'),
-    https = require('https');
+    request = require('request');
 
 
-
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 const getRandomWord = () => {
     return new Promise((resolve, reject) => {
         let url, res;
         url = `${host_data.host}/words/randomWord?api_key=${host_data.api_key}`;
-        res = https.get(url);
-        return res;
+        request(url, (err, res, body) => {
+            if (err) {
+                reject(err)
+            }
+            body=JSON.parse(body);
+            resolve(body.word)
+        })
     })
 }
 
 const makeHttpRequest = (op, word) => {
     return new Promise((resolve, reject) => {
+
         url = `${host_data.host}/word/${word}/${op}?api_key=${host_data.api_key}`;
-        console.log('api url----->',url);
-        
-        https.get(url,(res,body)=>{
-            console.log('res',body);
-            res.on('error',(error)=>{
-                console.log('error',error);
-                return reject(error);
-            })
-            
-            res.on("data",(res)=>{
-                return resolve(res.data);
-            })
+
+        request(url, (error, res, body) => {
+
+            if (error) {
+                reject(error);
+            }
+
+            resolve(body);
+
         })
     })
 }
