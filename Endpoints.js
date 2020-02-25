@@ -15,10 +15,18 @@ const getRandomWord = () => {
 const makeHttpRequest = (op, word) => {
     return new Promise((resolve, reject) => {
         url = `${host_data.host}/word/${word}/${op}?api_key=${host_data.api_key}`;
-        https.get(url).then(res => {
-            resolve(res)
-        }).catch(err => {
-            reject(err)
+        console.log('api url----->',url);
+        
+        https.get(url,(res)=>{
+            console.log('res',res);
+            res.on('error',(error)=>{
+                console.log('error',error);
+                return reject(error);
+            })
+            
+            res.on("data",(res)=>{
+                return resolve(res.data);
+            })
         })
     })
 }

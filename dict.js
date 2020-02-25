@@ -1,20 +1,21 @@
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 const endPoints = require('./Endpoints'),
     readline = require('readline'),
     dictionary = require('./dictionary_functions'),
     args = process.argv;
 
-switch (args[1]) {
+switch (args[2]) {
     case 'def':
-        dictionary.defn(args[2]);
+        dictionary.defn(args[3]);
         break;
     case 'syn':
-        dictionary.synonym(args[2]);
+        dictionary.synonym(args[3]);
         break;
     case 'ant':
-        dictionary.antonym(args[2]);
+        dictionary.antonym(args[3]);
         break;
     case 'ex':
-        dictionary.example(args[2]);
+        dictionary.example(args[3]);
         break;
     case 'play':
         let readPrompt = readline.createInterface(process.stdin, process.stdout);
@@ -47,7 +48,7 @@ switch (args[1]) {
                             wordinput = prompt("Enter word\n");
                             if (word === wordinput) {
                                 console.log("Correct word!!")
-                                flag = 1;
+                                exit = 1;
                             } else {
                                 console.log("incorrect guess.")
                             }
@@ -110,8 +111,8 @@ switch (args[1]) {
         }
         break;
     default:
-        if (ars[1]) {
-            dictionary.getAll(args[1])
+        if (args[2]) {
+            dictionary.getAll(args[2])
         }
         else {
             word = endPoints.getRandomWord()
