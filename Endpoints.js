@@ -17,8 +17,8 @@ const makeHttpRequest = (op, word) => {
         url = `${host_data.host}/word/${word}/${op}?api_key=${host_data.api_key}`;
         console.log('api url----->',url);
         
-        https.get(url,(res)=>{
-            console.log('res',res);
+        https.get(url,(res,body)=>{
+            console.log('res',body);
             res.on('error',(error)=>{
                 console.log('error',error);
                 return reject(error);
