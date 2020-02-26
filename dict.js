@@ -48,7 +48,7 @@ switch (args[2]) {
                         switch (choice) {
                             case 1:
                                 console.log(" Try again ");
-                                wordinput = prompt("Enter word\n");
+                                wordinput = await prompt("Enter word\n");
                                 if (word === wordinput) {
                                     console.log("Correct word!!")
                                     exit = 1;
@@ -58,11 +58,11 @@ switch (args[2]) {
                                 break;
                             case 2:
                                 console.log('options for hint')
-                                let hint = prompt('for hint enter 1 for julmbled word,2 for definition,3 for synonym,4 for antonym')
+                                let hint = await prompt('for hint enter 1 for julmbled word,2 for definition,3 for synonym,4 for antonym')
                                 switch (hint) {
                                     case 1:
                                         console.log('jumbled word : \n', word.split('').sort(function () { return 0.5 - Math.random() }).join(''))
-                                        wordinput = promt("Enter Your Word again\n");
+                                        wordinput = await promt("Enter Your Word again\n");
                                         if (word === wordinput) {
                                             console.log("Correct!")
                                             exit = 1;
@@ -72,7 +72,7 @@ switch (args[2]) {
                                         break;
                                     case 2:
                                         console.log('definitions : ', defs)
-                                        wordinput = promt("Enter Your Word again\n");
+                                        wordinput = await promt("Enter Your Word again\n");
                                         if (word === wordinput) {
                                             console.log("Correct!")
                                             exit = 1;
@@ -82,7 +82,7 @@ switch (args[2]) {
                                         break;
                                     case 3:
                                         console.log('synonyms : ', synonyms)
-                                        wordinput = promt("Enter Your Word again\n");
+                                        wordinput = await promt("Enter Your Word again\n");
                                         if (word === wordinput) {
                                             console.log("Correct!")
                                             exit = 1;
@@ -92,7 +92,7 @@ switch (args[2]) {
                                         break;
                                     case 4:
                                         console.log('antonyms : ', antonyms)
-                                        wordinput = promt("Enter Your Word again\n");
+                                        wordinput = await promt("Enter Your Word again\n");
                                         if (word === wordinput) {
                                             console.log("Correct!")
                                             exit = 1;
@@ -113,7 +113,7 @@ switch (args[2]) {
                     }
                 }
             }
-
+            process.exit()
         }).catch(err => {
             console.log('Error in playing game');
         })
