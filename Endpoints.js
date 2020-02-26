@@ -5,10 +5,11 @@ const host_data = require('./host_config'),
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 const getRandomWord = () => {
     return new Promise((resolve, reject) => {
-        let url, res;
+        let url;
         url = `${host_data.host}/words/randomWord?api_key=${host_data.api_key}`;
         request(url, (err, res, body) => {
             if (err) {
+                console.log(err);
                 reject(err)
             }
             body=JSON.parse(body);

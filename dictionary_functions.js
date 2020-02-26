@@ -4,10 +4,9 @@ process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
 const formArray = (words) => {
     let arr = [];
-   words=JSON.parse(words);
-    if(words && words.length>0)
-    {
-        words=words.map( x=>{
+    words = JSON.parse(words);
+    if (words && words.length > 0) {
+        words = words.map(x => {
             return x.text;
         })
     }
@@ -16,7 +15,7 @@ const formArray = (words) => {
 
 function defn(word) {
     endPoints.makeHttpRequest('definitions', word).then(res => {
-      
+
         let result = formArray(res);
         console.log('The list of definitions :');
         console.log(result);
@@ -28,13 +27,12 @@ function defn(word) {
 }
 function synonym(word) {
     endPoints.makeHttpRequest('relatedWords', word).then(res => {
-        res=JSON.parse(res);
-        if(res.length>1)
-        {
+        res = JSON.parse(res);
+        if (res.length > 1) {
             console.log('The list of synonyms :');
             console.log(res[1].words);
         }
-        else if(res.length===0){
+        else if (res.length === 0) {
             console.log('The list of synonyms :');
             console.log(res[0].words);
         }
@@ -45,8 +43,8 @@ function synonym(word) {
 }
 function antonym(word) {
     endPoints.makeHttpRequest('relatedWords', word).then(res => {
-        res=JSON.parse(res);
-        if (res.length>1) {
+        res = JSON.parse(res);
+        if (res.length > 1) {
             console.log('The list of antonyms :');
             console.log(res[0].words);
         }
@@ -60,9 +58,9 @@ function antonym(word) {
 }
 function example(word) {
     endPoints.makeHttpRequest('examples', word).then(async (res) => {
-        res=JSON.parse(JSON.stringify(res));
-        console.log('ex',res);
-        let arr=res.examples;
+        res = JSON.parse(JSON.stringify(res));
+        console.log('ex', res);
+        let arr = res.examples;
         let result = await formArray(arr);
         console.log('The list of example usage of word :');
         console.log(result);
@@ -72,24 +70,23 @@ function example(word) {
     return;
 }
 
-function  getAll(word) {
+function getAll(word) {
 
-    try{
+    try {
         defn(word);
-    synonym(word);
-    antonym(word);
-    example(word);
+        synonym(word);
+        antonym(word);
+        example(word);
     }
-    catch(err)
-    {
+    catch (err) {
         console.log(err);
     }
 }
 
-module.exports={
-        defn,
-        synonym,
-        antonym,
-        example,
-        getAll
+module.exports = {
+    defn,
+    synonym,
+    antonym,
+    example,
+    getAll
 }
